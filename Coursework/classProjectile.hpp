@@ -17,7 +17,7 @@ class Projectile
         double  get_velocity();
         void  set_X(double x);
         void  set_Y(double y);
-        void get_velocity(double v);
+        void set_velocity(double v);
         virtual void    Moving(double dt) = 0;
 };
 

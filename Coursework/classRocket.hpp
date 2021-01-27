@@ -10,7 +10,7 @@ class Rocket: public Projectile
     double time;
     Aim *aim;
     double Runge_Kutta(double coord, double dt, char c_type);
-    double calcR_K(double coord, double dt, char c_type)
+    double calcR_K(double coord, double dt, char c_type);
     public:
     Rocket(Aim *a, double t, double x, double y, double v):
         aim(a), time(t), Projectile(x, y, v)

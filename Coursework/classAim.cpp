@@ -27,6 +27,6 @@ void   Aim::set_angle(double a)
 
 void Aim::Moving(double dt)
 {
-    set_X(Projectile::get_X() + Projectile::get_velocity() * cos(fi) * dt);
-    set_Y(Projectile::get_Y() - Projectile::get_velocity() * sin(fi) * dt);
+    set_X(Projectile::get_X() + Projectile::get_velocity() * cos(angle) * dt);
+    set_Y(Projectile::get_Y() - Projectile::get_velocity() * sin(angle) * dt);
 }

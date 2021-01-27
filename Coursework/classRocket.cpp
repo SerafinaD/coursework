@@ -2,18 +2,18 @@
 
 double Rocket::get_X()
 {
-    return(Projectile::get_X);
+    return(Projectile::get_X());
 }
 
 double Rocket::get_Y()
 {
-    return(Projectile::get_Y);
+    return(Projectile::get_Y());
 }
 
 double Rocket::calcR_K(double coord, double t, char c_type)
 {
     double x_aim_velo = aim->get_velocity() * cos(aim->get_angle());
-    double y_aim_velo = aim->get_velocity() * sin(aim->get_angle())
+    double y_aim_velo = aim->get_velocity() * sin(aim->get_angle());
     double ans;
     if (c_type == 'x')
     {
