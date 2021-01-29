@@ -12,9 +12,9 @@ class Projectile
             coord_x(x), coord_y(y), velocity(v)
         {
         }
-        double  get_X();
-        double  get_Y();
-        double  get_velocity();
+        double  get_X() const;
+        double  get_Y() const;
+        double  get_velocity() const;
         void  set_X(double x);
         void  set_Y(double y);
         void set_velocity(double v);

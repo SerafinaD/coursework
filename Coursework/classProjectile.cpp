@@ -1,16 +1,16 @@
 #include "classProjectile.hpp"
 
-double Projectile::get_X()
+double Projectile::get_X() const
 {
     return (coord_x);
 }
 
-double Projectile::get_Y()
+double Projectile::get_Y() const
 {
     return (coord_y);
 }
 
-double  Projectile::get_velocity()
+double  Projectile::get_velocity() const
 {
     return (velocity);
 }

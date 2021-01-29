@@ -8,14 +8,14 @@ class Aim: public Projectile
     private:
     double angle;
     public:
-    Aim(double fi, double x, double y, double v):
-        angle(fi), Projectile(x, y, v)
+    Aim(double x, double y, double v, double fi):
+         Projectile(x, y, v), angle(fi)
     {
     }
-    double  get_angle();
-    double  get_X();
-    double  get_Y();
-    double  get_velocity();
+    double  get_angle() const;
+    double  get_X() const;
+    double  get_Y() const;
+    double  get_velocity() const;
     void    set_angle(double a);
     void Moving(double dt);
 };

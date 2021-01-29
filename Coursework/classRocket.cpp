@@ -1,11 +1,11 @@
 #include "classRocket.hpp"
 
-double Rocket::get_X()
+double Rocket::get_X() const
 {
     return(Projectile::get_X());
 }
 
-double Rocket::get_Y()
+double Rocket::get_Y() const
 {
     return(Projectile::get_Y());
 }

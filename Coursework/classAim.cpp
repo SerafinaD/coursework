@@ -1,21 +1,21 @@
 #include "classAim.hpp"
 
-double Aim::get_X()
+double Aim::get_X() const
 {
     return(Projectile::get_X());
 }
 
-double Aim::get_Y()
+double Aim::get_Y() const
 {
     return(Projectile::get_Y());
 }
 
-double Aim::get_velocity()
+double Aim::get_velocity() const
 {
     return(Projectile::get_velocity());
 }
 
-double Aim::get_angle()
+double Aim::get_angle() const
 {
     return (angle);
 }

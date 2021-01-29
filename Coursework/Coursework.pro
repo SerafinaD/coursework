@@ -25,10 +25,22 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+        classProjectile.cpp \
+        classAim.cpp \
+        classRocket.cpp \
+        PaintTrd.cpp \
+        CalcTrd.cpp \
+        PaintEvent.cpp
 
 HEADERS += \
-        mainwindow.hpp
+        mainwindow.hpp \
+        classProjectile.hpp \
+        classAim.hpp \
+        classRocket.hpp \
+        PaintTrd.hpp \
+        CalcTrd.hpp \
+        PaintEvent.hpp
 
 FORMS += \
         mainwindow.ui
