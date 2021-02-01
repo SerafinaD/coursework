@@ -18,6 +18,7 @@ class Aim: public Projectile
     double  get_velocity() const;
     void    set_angle(double a);
     void Moving(double dt);
+    ~Aim();
 };
 
 #endif

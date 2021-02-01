@@ -1,12 +1,16 @@
 #include "mainwindow.hpp"
 #include "ui_mainwindow.h"
 #include <QSize>
+#include <PaintEvent.hpp>
+#include <QtMath>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->graphicFlight->setStyleSheet("background-color:black;");
+    scene = new QGraphicsScene();
 }
 
 void MainWindow::resizeEvent(QResizeEvent *k)
@@ -41,4 +45,125 @@ void MainWindow::resizeEvent(QResizeEvent *k)
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::customEvent(QEvent* pe)
+{
+   if (pe->type() == PaintEvent::TypeEvent)
+   {
+       QPoint aim_p = static_cast<PaintEvent*>(pe)->aim_pos();
+       QPoint rocket_p = static_cast<PaintEvent*>(pe)->rocket_pos();
+       scene->clear();
+          if(!aim_p.x() && !aim_p.y() && !rocket_p.x() && !rocket_p.y())
+          {
+                  QImage image(":/boom.png");
+                  image = image.scaled(ui->graphicFlight->size());
+                  scene->addPixmap(QPixmap::fromImage(image));
+                  scene->setSceneRect(0,0,ui->graphicFlight->width(),ui->graphicFlight->height());
+                  ui->graphicFlight->setScene(scene);
+                  delete a;
+                  delete rocket;
+                  delete p_trd;
+                  delete controllerl;
+          }
+          else
+          {
+                QBrush aim_br(QColor(255, 255, 10));
+                QBrush rocket_br(QColor(255, 10, 10));
+                aim_br.setStyle(Qt::BrushStyle::VerPattern);
+                rocket_br.setStyle(Qt::BrushStyle::VerPattern);
+                scene->addRect(QRect(aim_p.x(),aim_p.y(),2,2), QPen(QColor(255,255,10)), aim_br);
+                scene->addRect(QRect(rocket_p.x(),rocket_p.y(),2,2), QPen(QColor(255,10,10)), rocket_br);
+                ui->graphicFlight->setScene(scene);
+          }
+   }
+}
+
+void MainWindow::keyPressEvent(QKeyEvent *event)
+{
+    if (event->key() == Qt::Key_Left || event->key() == Qt::Key_A)
+       {
+           a->set_angle(a->get_angle() + qDegreesToRadians(5.0));
+       }
+    if (event->key() == Qt::Key_Right || event->key() == Qt::Key_D)
+       {
+           a->set_angle(a->get_angle() - qDegreesToRadians(5.0));
+       }
+}
+
+void MainWindow::on_button_start_clicked()
+{
+    p_trd = new Paint_Trd(this);
+    p_trd->start();
+    double fi;
+    if (!ui->check_isRad->checkState())
+        fi = qDegreesToRadians(ui->line_fitarget->text().toDouble());
+    a = new Aim(ui->line_xtarget->text().toDouble(), ui->line_ytarget->text().toDouble(), ui->line_vtarget->text().toDouble(), fi);
+    rocket = new Rocket(ui->line_xrocket->text().toDouble(), ui->line_yrocket->text().toDouble(), ui->line_Vrocket->text().toDouble(), a);
+    controllerl = new Controller(this, p_trd);
+    controllerl->startCalc(a, rocket, ui->line_time->text().toDouble());
+}
+
+void MainWindow::on_line_xtarget_textChanged(const QString &arg1)
+{
+    bool ok;
+    arg1.toDouble(&ok);
+    if (!ok)
+        ui->line_xtarget->setText(QString::number(0.0));
+}
+
+void MainWindow::on_line_ytarget_textChanged(const QString &arg1)
+{
+    bool ok;
+    arg1.toDouble(&ok);
+    if (!ok)
+        ui->line_ytarget->setText(QString::number(0.0));
+}
+
+void MainWindow::on_line_fitarget_textChanged(const QString &arg1)
+{
+    bool ok;
+    arg1.toDouble(&ok);
+    if (!ok)
+        ui->line_fitarget->setText(QString::number(0.0));
+}
+
+void MainWindow::on_line_vtarget_textChanged(const QString &arg1)
+{
+    bool ok;
+    arg1.toDouble(&ok);
+    if (!ok)
+        ui->line_vtarget->setText(QString::number(0.0));
+}
+
+void MainWindow::on_line_xrocket_textChanged(const QString &arg1)
+{
+    bool ok;
+    arg1.toDouble(&ok);
+    if (!ok)
+        ui->line_xrocket->setText(QString::number(0.0));
+}
+
+void MainWindow::on_line_yrocket_textChanged(const QString &arg1)
+{
+    bool ok;
+    arg1.toDouble(&ok);
+    if (!ok)
+        ui->line_yrocket->setText(QString::number(0.0));
+}
+
+void MainWindow::on_line_time_textChanged(const QString &arg1)
+{
+    bool ok;
+    arg1.toDouble(&ok);
+    if (!ok)
+        ui->line_time->setText(QString::number(0.0));
+}
+
+void MainWindow::on_line_Vrocket_textChanged(const QString &arg1)
+{
+    bool ok;
+    arg1.toDouble(&ok);
+    if (!ok)
+        ui->line_Vrocket->setText(QString::number(0.0));
 }

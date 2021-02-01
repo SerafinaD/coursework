@@ -29,3 +29,6 @@ void  Projectile::set_velocity(double v)
 {
     velocity = v;
 }
+
+Projectile::~Projectile()
+{}

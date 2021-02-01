@@ -10,6 +10,11 @@ double Rocket::get_Y() const
     return(Projectile::get_Y());
 }
 
+double Rocket::get_velocity() const
+{
+    return(Projectile::get_velocity());
+}
+
 double Rocket::calcR_K(double coord, double t, char c_type)
 {
     double x_aim_velo = aim->get_velocity() * cos(aim->get_angle());
@@ -29,6 +34,7 @@ double Rocket::calcR_K(double coord, double t, char c_type)
         (x_aim_velo * t + aim->get_X() - get_X()) +
         (-y_aim_velo * t + aim->get_Y() - get_Y()) *
         (-y_aim_velo * t + aim->get_Y() - get_Y()));
+    return ans;
 }
 
 double Rocket::Runge_Kutta(double coord, double dt, char c_type)
@@ -49,4 +55,8 @@ void Rocket::Moving(double dt)
     set_X(Runge_Kutta(Projectile::get_X(), dt, 'x'));
     set_Y(Runge_Kutta(Projectile::get_Y(), dt, 'y'));
     time += dt;
+}
+
+Rocket::~Rocket()
+{
 }

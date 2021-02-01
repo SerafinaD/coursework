@@ -10,9 +10,9 @@ private:
     QPoint rocket;
 
 public:
-    enum {PaintType = User + 1};
+    enum {TypeEvent = User + 1};
 
-    PaintEvent() : QEvent((Type)PaintType)
+    PaintEvent() : QEvent((Type)TypeEvent)
     {
     }
 

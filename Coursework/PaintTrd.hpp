@@ -1,20 +1,22 @@
 #ifndef PAINTTRD_HPP
 #define PAINTTRD_HPP
 
+#include <QObject>
 #include <QThread>
+
 
 
 class Paint_Trd: public QThread
 {
+    Q_OBJECT
 private:
-    Aim *aim;
-    Rocket *rocket;
+bool isWork;
 public:
-    Calc_Trd(Aim *a, Rocket *r, QObject *parent = nullptr): QThread (parent), aim(a), rocket(r)
-    {
-    }
-    
-signals:
-   void stopedThread();
+    Paint_Trd(QObject *parent);
+protected:
+    void run();
+private slots:
+    void paint(int xt, int yt, int xr, int yr);
+    void boom();
 };
-#endif;
+#endif

@@ -31,7 +31,8 @@ SOURCES += \
         classRocket.cpp \
         PaintTrd.cpp \
         CalcTrd.cpp \
-        PaintEvent.cpp
+        PaintEvent.cpp \
+        classController.cpp
 
 HEADERS += \
         mainwindow.hpp \
@@ -40,7 +41,10 @@ HEADERS += \
         classRocket.hpp \
         PaintTrd.hpp \
         CalcTrd.hpp \
-        PaintEvent.hpp
+        PaintEvent.hpp \
+        classController.hpp
+
+RESOURCES     = res.qrc
 
 FORMS += \
         mainwindow.ui
