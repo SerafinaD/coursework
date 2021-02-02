@@ -23,7 +23,7 @@ double Rocket::calcR_K(double coord, double t, char c_type)
     if (c_type == 'x')
     {
         ans = Projectile::get_velocity() * (x_aim_velo * t + aim->get_X() - coord) /
-		sqrt((x_aim_velo * t + aim->get_X() - get_X()) *
+        sqrt((x_aim_velo * t + aim->get_X() - get_X()) *
         (x_aim_velo * t + aim->get_X() - get_X()) +
         (-y_aim_velo * t + aim->get_Y() - get_Y()) *
         (-y_aim_velo * t + aim->get_Y() - get_Y()));
@@ -44,9 +44,9 @@ double Rocket::Runge_Kutta(double coord, double dt, char c_type)
 	double c2;
 	double c3;
 	c0 = calcR_K(coord, time, c_type) * dt;
-	c1 = calcR_K(coord + c0 / 2, time + dt / 2, c_type) * dt;
-	c2 = calcR_K(coord + c1 / 2, time + dt / 2, c_type) * dt;
-	c3 = calcR_K(coord + c2, time + dt, c_type) * dt;
+    c1 = calcR_K(coord + c0 / 2, dt / 2, c_type) * dt;
+    c2 = calcR_K(coord + c1 / 2, dt / 2, c_type) * dt;
+    c3 = calcR_K(coord + c2, dt, c_type) * dt;
 	return (coord + (c0 + 2 * c1 + 2 * c2 + c3) / 6);
 }
 

@@ -13,6 +13,7 @@ private:
 bool isWork;
 public:
     Paint_Trd(QObject *parent);
+    void end(){isWork = false;}
 protected:
     void run();
 private slots:

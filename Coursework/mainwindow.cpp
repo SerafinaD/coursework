@@ -61,10 +61,12 @@ void MainWindow::customEvent(QEvent* pe)
                   scene->addPixmap(QPixmap::fromImage(image));
                   scene->setSceneRect(0,0,ui->graphicFlight->width(),ui->graphicFlight->height());
                   ui->graphicFlight->setScene(scene);
+                  delete controllerl;
                   delete a;
                   delete rocket;
+                  p_trd->end();
+                  p_trd->terminate();
                   delete p_trd;
-                  delete controllerl;
           }
           else
           {
@@ -84,10 +86,12 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     if (event->key() == Qt::Key_Left || event->key() == Qt::Key_A)
        {
            a->set_angle(a->get_angle() + qDegreesToRadians(5.0));
+           ui->lineTest->setText(QString::number(a->get_velocity()));
        }
     if (event->key() == Qt::Key_Right || event->key() == Qt::Key_D)
        {
            a->set_angle(a->get_angle() - qDegreesToRadians(5.0));
+           ui->lineTest->setText(QString::number(a->get_velocity()));
        }
 }
 
@@ -96,10 +100,11 @@ void MainWindow::on_button_start_clicked()
     p_trd = new Paint_Trd(this);
     p_trd->start();
     double fi;
+    fi = ui->line_fitarget->text().toDouble();
     if (!ui->check_isRad->checkState())
         fi = qDegreesToRadians(ui->line_fitarget->text().toDouble());
-    a = new Aim(ui->line_xtarget->text().toDouble(), ui->line_ytarget->text().toDouble(), ui->line_vtarget->text().toDouble(), fi);
-    rocket = new Rocket(ui->line_xrocket->text().toDouble(), ui->line_yrocket->text().toDouble(), ui->line_Vrocket->text().toDouble(), a);
+    a = new Aim(ui->line_xtarget->text().toDouble(), ui->line_ytarget->text().toDouble(), (ui->line_vtarget->text().toDouble() / 160), fi);
+    rocket = new Rocket(ui->line_xrocket->text().toDouble(), ui->line_yrocket->text().toDouble(), (ui->line_Vrocket->text().toDouble() / 160), a);
     controllerl = new Controller(this, p_trd);
     controllerl->startCalc(a, rocket, ui->line_time->text().toDouble());
 }
